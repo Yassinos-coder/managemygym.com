@@ -60,14 +60,37 @@ app.use(hpp());
 // Compression to reduce the size of the response body
 app.use(compression());
 
-// Rate limiting
+// Set to store IPs that have exceeded the rate limit
+const loggedIPs = new Set();
+
+// Rate limiting with custom handler for logging IPs only once
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
   message: "Too many requests from this IP, please try again later.",
   standardHeaders: true, // Return rate limit info in headers
   legacyHeaders: false, // Disable X-RateLimit-* headers
+  handler: (req, res, next) => {
+    const ip = req.ip;
+
+    // Log the IP address only once when the rate limit is exceeded
+    if (!loggedIPs.has(ip)) {
+      console.warn(`IP ${ip} exceeded 100 requests`);
+      loggedIPs.add(ip);
+    }
+
+    // Send the standard rate limit response
+    res.status(429).json({
+      message: "Too many requests from this IP, please try again later.",
+    });
+  }
 });
+
+// Periodically clear the logged IPs set (based on the windowMs duration)
+setInterval(() => {
+  loggedIPs.clear();
+}, 15 * 60 * 1000); // Clear the set every 15 minutes
+
 app.use(limiter);
 
 // Parse incoming requests
