@@ -19,11 +19,9 @@ const UserSchema = new db.Schema({
     },
     ownerGymId: {
         type: db.Types.ObjectId,
-        required: false
     },
     paymentMethodId: {
         type: String,
-        required: false
     },
     billingAddress: {
         street: String,
@@ -31,7 +29,6 @@ const UserSchema = new db.Schema({
         state: String,
         zipCode: String,
         country: String,
-        required: false
 
     },
     paymentHistory: [{
@@ -39,7 +36,6 @@ const UserSchema = new db.Schema({
         amount: Number,
         date: Date,
         status: String,
-        required: false
 
     }],
     isVerified: {
@@ -52,16 +48,13 @@ const UserSchema = new db.Schema({
     },
     subscriptionType: {
         type: String,
-        required: false,
         enum: ['free', 'basic', 'premium']
     },
     subscriptionStartDate: {
         type: Date,
-        required: false
     },
     subscriptionEndDate: {
         type: Date,
-        required: false
     }
 });
 

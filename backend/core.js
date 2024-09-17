@@ -22,9 +22,13 @@ const rateLimit = require("express-rate-limit");
 const compression = require("compression");
 const hpp = require("hpp");
 const fileUpload = require("express-fileupload");
+const usersAPI = require('./APIs/usersAPI')
+
 
 // Initialize express app
 const app = express();
+
+
 
 // Security middlewares
 app.use(
@@ -114,8 +118,13 @@ app.use((req, res, next) => {
   res.status(404).send("Sorry, can't find that!");
 });
 
+// Share Uploads Folder with the open world
+app.use(express.static("Uploads"));
+
 // Start the server
 const PORT = 8009;
 app.listen(PORT, () => {
   console.log(`Server running securely on port ${PORT}`);
 });
+
+app.use(usersAPI)
