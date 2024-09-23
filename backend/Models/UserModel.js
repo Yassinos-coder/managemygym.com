@@ -1,11 +1,11 @@
 const db = require('mongoose');
 
 const UserSchema = new db.Schema({
-    userEmail: {
+    email: {
         type: String,
         required: true
     },
-    hashedPassword: {
+    password: {
         type: String,
         required: true
     },
