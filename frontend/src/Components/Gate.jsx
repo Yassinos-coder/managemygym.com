@@ -12,7 +12,7 @@ function Gate() {
             alert('Fields can\'t be empty');
         } else {
             console.log(loginData)
-            dispatch(Login(loginData))
+            dispatch(Login({ loginData }))
                 .then(data => {
                     // Handle successful login here
                     console.log('Login successful:', data);
@@ -20,6 +20,10 @@ function Gate() {
                 .catch((err) => console.error('Login error:', err.message));
         }
     };
+
+    const TriggerSignup = () => {
+
+    }
 
 
     return (
@@ -59,7 +63,24 @@ function Gate() {
 
                     ) : (
                         <div className="signup">
-                            <p>Sign up form here</p>
+                            <div className="SignupinputContainer">
+                                <div className="fnLn">
+                                    <input type="text" className=" " placeholder="Enter firstname" />
+                                    <input type="text" className=" " placeholder="Enter lastname" />
+                                </div>
+                                <input type="text" className="input " placeholder="Enter email" />
+                                <input type="text" className="input " placeholder="Enter password" />
+                                <input type="password" className="input " placeholder="Enter phonenumber" />
+                                <button onClick={TriggerSignup} className="loginBtn">SIGN UP</button>
+                                <div className="privacy-tos">
+                                    <p>
+                                        By signin up, you agree to our
+                                        <a href="/terms-of-service" target="_blank"> Terms of Service </a>
+                                        and
+                                        <a href="/privacy-policy" target="_blank"> Privacy Policy </a>.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     )
                 }

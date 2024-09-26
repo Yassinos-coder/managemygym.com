@@ -45,7 +45,7 @@ app.use(helmet({
 }));
 
 // CORS configuration
-const allowedOrigins = [process.env.FRONTEND_URL || "http://127.0.0.1:5173/"]; // Using environment variable
+const allowedOrigins = process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : "*"; // Using environment variable
 app.use(cors({
   origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE"],
@@ -88,20 +88,24 @@ const connectDB = async () => {
 };
 connectDB(); // Call the database connection function
 
+// Initialize routers
+app.use(userApiRouter);
+
 // Define a catch-all route for undefined routes
 app.use((req, res, next) => {
   res.status(404).json({ message: "Sorry, can't find that!" });
 });
 
-app.post('/test', (req, res) => {
-  res.send('Accepted')
-})
+// Health check route
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'UP' });
+});
+
 
 // Serve static files from the Uploads folder
 app.use(express.static("Uploads"));
 
-// Initialize routers
-app.use(userApiRouter);
+
 
 // Start the server
 const PORT = process.env.PORT || 8009; // Use environment variable for port

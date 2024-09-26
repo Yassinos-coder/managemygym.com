@@ -116,3 +116,33 @@
 .privacy-tos a:hover {
     text-decoration: underline;
 }
+
+
+.SignupinputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Centers the input horizontally */
+    width: 100%;
+}
+
+.fnLn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 10px
+}
+
+.fnLn>input {
+    height: 50px;
+    margin-top: 20px;
+    width: 162px;
+    /* Adds vertical spacing between inputs */
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    padding-left: 10px;
+}
