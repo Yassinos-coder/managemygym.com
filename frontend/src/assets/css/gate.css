@@ -1,0 +1,118 @@
+.Gate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(235, 235, 235);
+}
+
+.gateBox {
+    background-color: #fff;
+    width: 500px;
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: 1px 3px 29px -2px rgba(0, 0, 0, 0.75);
+    display: flex;
+    /* Added Flexbox */
+    flex-direction: column;
+}
+
+.gateBoxHeader {
+    background-color: red;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnPreset {
+    height: 50px;
+    width: 50%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.btnPreset:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+.login {
+    flex: 1;
+    /* Fill remaining space in .gateBox */
+    display: flex;
+    justify-content: center;
+    /* Centers horizontally */
+    align-items: center;
+    /* Centers vertically */
+    flex-direction: column;
+    /* Stacks inputs vertically */
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Centers the input horizontally */
+    width: 100%;
+}
+
+.input {
+    width: 350px;
+    height: 50px;
+    margin-top: 20px;
+    /* Adds vertical spacing between inputs */
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.resetPassword {
+    color: #4F46E5;
+    align-self: first baseline;
+    margin-top: 10px;
+    padding-left: 70px;
+}
+
+.resetPassword:hover {
+    color: red;
+}
+
+.loginBtn {
+    background-color: #4F46E5;
+    border: none;
+    width: 350px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 18px;
+    line-height: 1.25rem;
+    font-weight: 500;
+    color: white;
+    margin-top: 50px;
+    cursor: pointer;
+
+}
+
+.loginBtn:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+.privacy-tos {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+}
+
+.privacy-tos a {
+    color: #007bff;
+    /* Link color */
+    text-decoration: none;
+}
+
+.privacy-tos a:hover {
+    text-decoration: underline;
+}

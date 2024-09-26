@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Homepage from "./Components/Homepage";
 import "./assets/css/App.css";
 import { useEffect } from "react";
+import Gate from "./Components/Gate";
 
 function App() {
   useEffect(() => {
@@ -18,6 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Homepage />} />
+          <Route path="/gate" element={<Gate />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -22,41 +22,36 @@ const rateLimit = require("express-rate-limit");
 const compression = require("compression");
 const hpp = require("hpp");
 const fileUpload = require("express-fileupload");
-const usersAPI = require('./APIs/usersAPI')
-
+const userApiRouter = require("./APIs/usersAPI");
 
 // Initialize express app
 const app = express();
 
-
-
 // Security middlewares
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      useDefaults: true,
-      directives: {
-        "default-src": ["'self'"],
-        "script-src": ["'self'", "'unsafe-inline'"],
-        "object-src": ["'none'"],
-        "upgrade-insecure-requests": [],
-      },
+app.use(helmet({
+  contentSecurityPolicy: {
+    useDefaults: true,
+    directives: {
+      "default-src": ["'self'"],
+      "script-src": ["'self'", "'unsafe-inline'"],
+      "object-src": ["'none'"],
+      "upgrade-insecure-requests": [],
     },
-    frameguard: { action: "deny" }, // Prevent clickjacking
-    referrerPolicy: { policy: "no-referrer" }, // Avoid exposing referrer information
-    hsts: { maxAge: 31536000, includeSubDomains: true, preload: true }, // Force HTTPS
-  })
-);
+  },
+  frameguard: { action: "deny" }, // Prevent clickjacking
+  referrerPolicy: { policy: "no-referrer" }, // Avoid exposing referrer information
+  // Only enable HSTS in production
+  hsts: process.env.NODE_ENV === "production" ? { maxAge: 31536000, includeSubDomains: true, preload: true } : false,
+}));
 
 // CORS configuration
-app.use(
-  cors({
-    origin: ["http://localhost:5173"], // Replace with your frontend's domain
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // Enable for cookie sharing
-    optionsSuccessStatus: 200,
-  })
-);
+const allowedOrigins = [process.env.FRONTEND_URL || "http://127.0.0.1:5173/"]; // Using environment variable
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+  optionsSuccessStatus: 200,
+}));
 
 // HPP to prevent HTTP Parameter Pollution attacks
 app.use(hpp());
@@ -64,37 +59,16 @@ app.use(hpp());
 // Compression to reduce the size of the response body
 app.use(compression());
 
-// Set to store IPs that have exceeded the rate limit
-const loggedIPs = new Set();
-
 // Rate limiting with custom handler for logging IPs only once
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
   message: "Too many requests from this IP, please try again later.",
-  standardHeaders: true, // Return rate limit info in headers
-  legacyHeaders: false, // Disable X-RateLimit-* headers
-  handler: (req, res, next) => {
-    const ip = req.ip;
-
-    // Log the IP address only once when the rate limit is exceeded
-    if (!loggedIPs.has(ip)) {
-      console.warn(`IP ${ip} exceeded 100 requests`);
-      loggedIPs.add(ip);
-    }
-
-    // Send the standard rate limit response
-    res.status(429).json({
-      message: "Too many requests from this IP, please try again later.",
-    });
-  }
+  standardHeaders: true,
+  legacyHeaders: false,
 });
 
-// Periodically clear the logged IPs set (based on the windowMs duration)
-setInterval(() => {
-  loggedIPs.clear();
-}, 15 * 60 * 1000); // Clear the set every 15 minutes
-
+// Apply rate limiter
 app.use(limiter);
 
 // Parse incoming requests
@@ -103,28 +77,34 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(fileUpload({ limits: { fileSize: 50 * 1024 * 1024 } })); // Set file upload limits
 
 // Database connection
-mongoose.set("strictQuery", false);
-mongoose
-  .connect(process.env.MONGO_URI, {})
-  .then(() => {
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {});
     console.info("Database connection successful");
-  })
-  .catch((error) => {
+  } catch (error) {
     console.error("Database connection error:", error.message);
-  });
+    process.exit(1); // Exit process with failure
+  }
+};
+connectDB(); // Call the database connection function
 
-// Catch-all route for undefined routes
+// Define a catch-all route for undefined routes
 app.use((req, res, next) => {
-  res.status(404).send("Sorry, can't find that!");
+  res.status(404).json({ message: "Sorry, can't find that!" });
 });
 
-// Share Uploads Folder with the open world
+app.post('/test', (req, res) => {
+  res.send('Accepted')
+})
+
+// Serve static files from the Uploads folder
 app.use(express.static("Uploads"));
 
+// Initialize routers
+app.use(userApiRouter);
+
 // Start the server
-const PORT = 8009;
+const PORT = process.env.PORT || 8009; // Use environment variable for port
 app.listen(PORT, () => {
   console.log(`Server running securely on port ${PORT}`);
 });
-
-app.use(usersAPI)
