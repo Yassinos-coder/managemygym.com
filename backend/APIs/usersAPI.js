@@ -74,6 +74,7 @@ userApiRouter.post(
         }
 
         let loginData = req.body;
+        console.log(loginData)
 
         try {
             // Find the user by email
