@@ -3,6 +3,8 @@ import Homepage from "./Components/Homepage";
 import "./assets/css/App.css";
 import { useEffect } from "react";
 import Gate from "./Components/Gate";
+import RoutesAuth from "./utils/RoutesAuth";
+import Dashboard from "./Components/Dashboard";
 
 function App() {
   useEffect(() => {
@@ -20,6 +22,10 @@ function App() {
         <Routes>
           <Route index element={<Homepage />} />
           <Route path="/gate" element={<Gate />} />
+          <Route element={<RoutesAuth/>}>
+            <Route path="/dashboard/:uuid/" element={<Dashboard/>} >
+            </Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

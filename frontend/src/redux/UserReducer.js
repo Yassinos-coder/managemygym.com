@@ -26,8 +26,13 @@ const UserReducer = createSlice({
     initialState: {
         UserData: [],
         status: null,
+        isUserConnected: false,
     },
-    reducers: {},
+    reducers: {
+        setUserConnected(state, action) {
+            state.isUserConnected = action.payload; // payload should be true or false
+          },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(Login.fulfilled, (state, action) => {
@@ -52,5 +57,6 @@ const UserReducer = createSlice({
             })
     }
 })
+export const { setUserConnected } = UserReducer.actions;
 
 export default UserReducer.reducer
