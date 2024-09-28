@@ -11,6 +11,15 @@ export const Login = createAsyncThunk('users/login', async ({ loginData }) => {
     }
 })
 
+export const Signup = createAsyncThunk('users/Signup', async({newUser}) => {
+    try {
+        const response = await AxiosDefault.post('newUser', newUser)
+        return response.data
+    } catch (err) {
+        console.error(`Error in Signup reducer ${err.message}`)
+    }
+})
+
 
 const UserReducer = createSlice({
     name: 'UserActionHandler',
@@ -29,6 +38,16 @@ const UserReducer = createSlice({
                 state.status = 'pending'
             })
             .addCase(Login.rejected, (state, action) => {
+                state.status = `refused ${action.payload.error}`
+            })
+            .addCase(Signup.fulfilled, (state, action) => {
+                state.UserData = action.payload.userData
+                state.status = 'accepted'
+            })
+            .addCase(Signup.pending, (state,) => {
+                state.status = 'pending'
+            })
+            .addCase(Signup.rejected, (state, action) => {
                 state.status = `refused ${action.payload.error}`
             })
     }

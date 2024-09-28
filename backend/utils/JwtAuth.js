@@ -18,7 +18,7 @@ const verifyToken = (req, res, next) => {
     try {
         // Verify the token using the secret key
         const decoded = jwt.verify(token, process.env.SECRET_TOKEN_KEY);
-        
+
         // Attach user information to request for further use
         req.user = decoded;
 
@@ -31,4 +31,4 @@ const verifyToken = (req, res, next) => {
 };
 
 
-module.exports = signToken, verifyToken
+module.exports = { verifyToken, signToken }

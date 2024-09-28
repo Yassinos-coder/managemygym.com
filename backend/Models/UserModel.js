@@ -1,6 +1,14 @@
 const db = require('mongoose');
 
 const UserSchema = new db.Schema({
+    firstname: {
+        type: String,
+        required:true,
+    },
+    lastname: {
+        type: String,
+        required:true,
+    },
     email: {
         type: String,
         required: true

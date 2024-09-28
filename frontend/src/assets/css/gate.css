@@ -9,7 +9,7 @@
 .gateBox {
     background-color: #fff;
     width: 500px;
-    height: 500px;
+    height: auto;
     border-radius: 20px;
     box-shadow: 1px 3px 29px -2px rgba(0, 0, 0, 0.75);
     display: flex;
@@ -18,11 +18,12 @@
 }
 
 .gateBoxHeader {
-    background-color: red;
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .btnPreset {
@@ -31,11 +32,25 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
+
 }
 
 .btnPreset:hover {
     transform: scale(1.05);
     transition: transform 0.2s ease;
+}
+
+.btnSignup {
+    border-top-left-radius: 20px;
+}
+
+.btnSignin {
+    border-top-right-radius: 20px;
+}
+
+.pTitle {
+    text-align: center;
+    font-size: 18px;
 }
 
 .login {
@@ -69,11 +84,20 @@
     padding-left: 10px;
 }
 
+.select {
+    width: 365px;
+}
+
 .resetPassword {
     color: #4F46E5;
     align-self: first baseline;
     margin-top: 10px;
-    padding-left: 70px;
+    margin-left: 70px;
+    font-size: 15px;
+}
+
+.resetPassword:visited {
+    color: initial;
 }
 
 .resetPassword:hover {

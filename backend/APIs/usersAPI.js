@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const { body, validationResult } = require('express-validator');
 const UserModel = require('../Models/UserModel');
 const saltRounds = 10;
-const { signToken } = require('../utils/JwtAuth'); // Import the correct function
+const { signToken, verifyToken } = require('../utils/JwtAuth')
 
 // User creates account with input validation
 userApiRouter.post(
@@ -24,7 +24,7 @@ userApiRouter.post(
         }
 
         let newUser = req.body;
-
+        console.log(newUser)
         try {
             const doesUserExist = await UserModel.findOne({ email: newUser.email });
             if (doesUserExist) {
@@ -41,6 +41,7 @@ userApiRouter.post(
             await user.save();
 
             res.status(201).json({
+                userData: user,
                 message: 'USER_CREATED',
                 status: 'SUCCESS'
             });
@@ -74,7 +75,6 @@ userApiRouter.post(
         }
 
         let loginData = req.body;
-        console.log(loginData)
 
         try {
             // Find the user by email
@@ -94,11 +94,12 @@ userApiRouter.post(
                     status: 'ERROR'
                 });
             }
-
+            let token = signToken(userDataFromDB)
             // Sign JWT token and send response
+            userDataFromDB.password = null
             res.status(200).json({
-                userData: { id: userDataFromDB._id, email: userDataFromDB.email },
-                token: signToken(userDataFromDB),
+                userData: userDataFromDB,
+                token: token,
                 message: 'ACCESS_GRANTED',
                 status: 'SUCCESS'
             });
