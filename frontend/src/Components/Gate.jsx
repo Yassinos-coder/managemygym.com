@@ -1,7 +1,7 @@
 import { useState } from "react";
 import '../assets/css/gate.css';
 import { useDispatch } from 'react-redux';
-import { Login, setUserConnected, Signup } from "../redux/UserReducer";
+import { Login, Signup } from "../redux/UserReducer";
 import UserObject from "../Models/UserObject";
 import { useNavigate } from "react-router-dom";
 
@@ -16,34 +16,16 @@ function Gate() {
         if (!loginData.email || !loginData.password) {
             alert('Fields can\'t be empty');
         } else {
-            dispatch(Login({ loginData }))
-                .then(data => {
-                    if (data && data.payload) {
-                        switch (data.payload.status) {
-                            case 'SUCCESS': // Directly check the value of status
-                                localStorage.setItem('user_access_status', 'true');
-                                localStorage.setItem('tokenKey', data.payload.token);
-                                localStorage.setItem('uuid', data.payload.userData._id);
+            dispatch(Login({ loginData })).then((data) => {
+                console.log('frt', data.payload)
+                if (data.payload.message === 'ACCESS_GRANTED') {
+                    localStorage.setItem('token', data.payload.token)
+                    localStorage.setItem('user_access_status', 'true')
+                    localStorage.setItem('uuid', data.payload.userData._id)
+                    navigate(`/dashboard/${localStorage.getItem('uuid')}`)
+                }
+            })
 
-                                // Dispatch Redux action to update state
-                                dispatch(setUserConnected(true));
-
-                                // Navigate to dashboard
-                                navigate(`/dashboard/${data.payload.userData._id}`);
-                                break;
-                            case 'ERROR': // Handle error case
-                                alert(data.payload.message);
-                                window.location.reload();
-                                break;
-                            default:
-                                console.warn('Unhandled status:', data.payload.status);
-                                break;
-                        }
-                    } else {
-                        alert("Login failed: No response from server.");
-                    }
-                })
-                .catch((err) => console.error('Login error:', err.message));
         }
     };
 

@@ -5,6 +5,7 @@ const { body, validationResult } = require('express-validator');
 const UserModel = require('../Models/UserModel');
 const saltRounds = 10;
 const { signToken, verifyToken } = require('../utils/JwtAuth')
+var CryptoJS = require("crypto-js");
 
 // User creates account with input validation
 userApiRouter.post(
@@ -77,7 +78,6 @@ userApiRouter.post(
         let loginData = req.body;
 
         try {
-            // Find the user by email
             let userDataFromDB = await UserModel.findOne({ email: loginData.email });
             if (!userDataFromDB) {
                 return res.status(404).json({
@@ -86,7 +86,6 @@ userApiRouter.post(
                 });
             }
 
-            // Compare password
             let passwordMatch = bcrypt.compareSync(loginData.password, userDataFromDB.password);
             if (!passwordMatch) {
                 return res.status(401).json({
@@ -94,15 +93,26 @@ userApiRouter.post(
                     status: 'ERROR'
                 });
             }
-            let token = signToken(userDataFromDB)
-            // Sign JWT token and send response
-            userDataFromDB.password = null
-            res.status(200).json({
-                userData: userDataFromDB,
+
+            let token = signToken(userDataFromDB);
+            const userObject = userDataFromDB.toObject();
+            delete userObject.password; // Remove sensitive data
+
+            // Encrypt user data
+            var userDataEncrypted = CryptoJS.AES.encrypt(JSON.stringify({
+                userData: userObject,
                 token: token,
                 message: 'ACCESS_GRANTED',
                 status: 'SUCCESS'
+            }), process.env.ENCRYPTION_KEY).toString();
+
+            // Send encrypted data as part of a JSON response
+            res.status(200).json({
+                encryptedData: userDataEncrypted,
+                message: "Encryption successful",
+                status: "SUCCESS"
             });
+
 
         } catch (err) {
             console.error(`Error in login => ${err.message}`);
@@ -114,5 +124,6 @@ userApiRouter.post(
         }
     }
 );
+
 
 module.exports = userApiRouter;
