@@ -10,22 +10,20 @@
 .actionsMenu {
     background-color: #ecf0f1;
     /* Light Gray Background */
-    height: 97vh;
+    height: 100%;
     width: 280px;
     /* Fixed width */
     flex-shrink: 0;
     /* Prevent shrinking */
-    padding-top: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     /* Subtle shadow */
 }
 
 /* Outlet View (Main Content) */
 .outletView {
-    height: 100vh;
-    flex-grow: 1;
+    height: 100%;
+        flex-grow: 1;
     /* Takes remaining space */
-    padding-top: 20px;
     padding-left: 20px;
     /* Spacing around content */
 }
@@ -38,6 +36,7 @@
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 30px;
+    padding-top: 20px;
     /* Spacing between greeting and buttons */
 }
 

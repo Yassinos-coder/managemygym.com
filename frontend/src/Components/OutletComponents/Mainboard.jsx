@@ -1,7 +1,10 @@
+import '../../assets/css/outletCss/Mainboard.css'
 
 const Mainboard = () => {
   return (
-    <div>Mainboard</div>
+    <div className='Mainboard'>
+        
+    </div>
   )
 }
 
