@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Gate from "./Components/Gate";
 import RoutesAuth from "./utils/RoutesAuth";
 import Dashboard from "./Components/Dashboard";
+import Mainboard from "./Components/OutletComponents/Mainboard";
 
 function App() {
   useEffect(() => {
@@ -22,8 +23,9 @@ function App() {
         <Routes>
           <Route index element={<Homepage />} />
           <Route path="/gate" element={<Gate />} />
-          <Route element={<RoutesAuth/>}>
-            <Route path="/dashboard/:uuid/" element={<Dashboard/>} >
+          <Route element={<RoutesAuth />}>
+            <Route path="/dashboard/:uuid/" element={<Dashboard />} >
+              <Route index element={<Mainboard />} />
             </Route>
           </Route>
         </Routes>

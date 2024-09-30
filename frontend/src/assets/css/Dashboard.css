@@ -1,0 +1,81 @@
+/* Dashboard Layout */
+.Dashboard {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+/* Actions Menu */
+.actionsMenu {
+    background-color: #ecf0f1; /* Light Gray Background */
+    height: 100vh;
+    width: 280px; /* Fixed width */
+    flex-shrink: 0; /* Prevent shrinking */
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Outlet View (Main Content) */
+.outletView {
+    height: 100vh;
+    flex-grow: 1; /* Takes remaining space */
+    padding: 20px; /* Spacing around content */
+}
+
+/* Greeting Text */
+.greetingPActionMenu {
+    text-align: center;
+    color: #2c3e50; /* Navy Blue */
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 30px; /* Spacing between greeting and buttons */
+}
+
+/* Actions (Buttons) */
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px; /* Decreased gap for better spacing */
+}
+
+/* Buttons */
+.btns {
+    background-color: #e67e22; /* Burnt Orange */
+    color: white;
+    border: none;
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px; /* Rounded corners for modern look */
+    transition: all 0.3s ease-in-out; /* Smooth transitions */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    outline: none; /* Remove default outline */
+}
+
+/* Hover Effects */
+.btns:hover {
+    background-color: #2ecc71; /* Emerald Green */
+    transform: translateY(-3px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Focus State (for accessibility) */
+.btns:focus {
+    outline: 3px solid #f1c40f; /* Yellow focus ring for accessibility */
+}
+
+/* Active State (when button is pressed) */
+.btns:active {
+    transform: translateY(0); /* Reset transform on click */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow on click */
+}
+
+.btns > span {
+    position: relative;
+    font-size: 20px;
+    padding-right: 10px;
+    top: 2px;
+}

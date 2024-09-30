@@ -37,7 +37,7 @@ export const Signup = createAsyncThunk('users/Signup', async ({ newUser }) => {
 const UserReducer = createSlice({
     name: 'UserActionHandler',
     initialState: {
-        userData: null,
+        userData: [],
         status: null,
         isUserConnected: false,
 
