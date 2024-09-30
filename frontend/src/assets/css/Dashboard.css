@@ -8,28 +8,37 @@
 
 /* Actions Menu */
 .actionsMenu {
-    background-color: #ecf0f1; /* Light Gray Background */
-    height: 100vh;
-    width: 280px; /* Fixed width */
-    flex-shrink: 0; /* Prevent shrinking */
+    background-color: #ecf0f1;
+    /* Light Gray Background */
+    height: 97vh;
+    width: 280px;
+    /* Fixed width */
+    flex-shrink: 0;
+    /* Prevent shrinking */
     padding-top: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
 }
 
 /* Outlet View (Main Content) */
 .outletView {
     height: 100vh;
-    flex-grow: 1; /* Takes remaining space */
-    padding: 20px; /* Spacing around content */
+    flex-grow: 1;
+    /* Takes remaining space */
+    padding-top: 20px;
+    padding-left: 20px;
+    /* Spacing around content */
 }
 
 /* Greeting Text */
 .greetingPActionMenu {
     text-align: center;
-    color: #2c3e50; /* Navy Blue */
+    color: #2c3e50;
+    /* Navy Blue */
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 30px; /* Spacing between greeting and buttons */
+    margin-bottom: 30px;
+    /* Spacing between greeting and buttons */
 }
 
 /* Actions (Buttons) */
@@ -37,45 +46,56 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 20px; /* Decreased gap for better spacing */
+    row-gap: 20px;
+    /* Decreased gap for better spacing */
 }
 
-/* Buttons */
 .btns {
-    background-color: #e67e22; /* Burnt Orange */
+    background-color: #e67e22;
     color: white;
     border: none;
-    width: 200px;
+    width: 100%;
+    max-width: 200px;
     height: 50px;
     cursor: pointer;
     font-size: 16px;
-    border-radius: 8px; /* Rounded corners for modern look */
-    transition: all 0.3s ease-in-out; /* Smooth transitions */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    outline: none; /* Remove default outline */
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
 }
+
+.btns.active {
+    background-color: #2ecc71;
+    /* Change to Emerald Green when active */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
 
 /* Hover Effects */
 .btns:hover {
-    background-color: #2ecc71; /* Emerald Green */
-    transform: translateY(-3px); /* Slight lift on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+    background-color: #2ecc71;
+    /* Emerald Green */
+    transform: translateY(-3px);
+    /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    /* Enhanced shadow on hover */
 }
 
 /* Focus State (for accessibility) */
 .btns:focus {
-    outline: 3px solid #f1c40f; /* Yellow focus ring for accessibility */
+    outline: 3px solid #f1c40f;
+    /* Yellow focus ring for accessibility */
 }
 
-/* Active State (when button is pressed) */
-.btns:active {
-    transform: translateY(0); /* Reset transform on click */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow on click */
-}
 
-.btns > span {
+
+.btns>span {
     position: relative;
     font-size: 20px;
-    padding-right: 10px;
+    padding-right: 5px;
     top: 2px;
 }

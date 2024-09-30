@@ -26,8 +26,15 @@ function App() {
           <Route element={<RoutesAuth />}>
             <Route path="/dashboard/:uuid/" element={<Dashboard />} >
               <Route index element={<Mainboard />} />
+              <Route path="addMember" element={<Mainboard />} />
+              <Route path="addEmployee" element={<Mainboard />} />
+              <Route path="membersList" element={<Mainboard />} />
+              <Route path="employeeList" element={<Mainboard />} />
+              <Route path="accountSettings" element={<Mainboard />} />
             </Route>
           </Route>
+          <Route path="/reportBug" element={<Gate />}/>
+          <Route path="/logout" element={<Gate />}/>
         </Routes>
       </BrowserRouter>
     </>

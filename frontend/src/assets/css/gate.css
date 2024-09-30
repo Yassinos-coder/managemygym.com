@@ -1,22 +1,26 @@
+/* Gate Page Layout */
 .Gate {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: rgb(235, 235, 235);
+    background-color: #ecf0f1;
+    /* Light Gray Background */
 }
 
+/* Gate Box */
 .gateBox {
     background-color: #fff;
+    /* White Box */
     width: 500px;
-    height: auto;
     border-radius: 20px;
     box-shadow: 1px 3px 29px -2px rgba(0, 0, 0, 0.75);
+    /* Shadow for depth */
     display: flex;
-    /* Added Flexbox */
     flex-direction: column;
 }
 
+/* Gate Box Header (Sign Up / Log In Toggle) */
 .gateBoxHeader {
     height: 50px;
     display: flex;
@@ -24,18 +28,27 @@
     align-items: center;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    background-color: #2c3e50;
+    /* Navy Blue for contrast */
 }
 
+/* Toggle Buttons (Sign Up / Log In) */
 .btnPreset {
     height: 50px;
     width: 50%;
     border: none;
     font-size: 20px;
     cursor: pointer;
-
+    background-color: transparent;
+    /* Transparent background */
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
 }
 
 .btnPreset:hover {
+    background-color: #e67e22;
+    /* Burnt Orange on hover */
     transform: scale(1.05);
     transition: transform 0.2s ease;
 }
@@ -48,82 +61,100 @@
     border-top-right-radius: 20px;
 }
 
+/* Login / Signup Form */
 .pTitle {
     text-align: center;
     font-size: 18px;
+    color: #2c3e50;
+    /* Navy Blue for headers */
 }
 
-.login {
+/* Login Section */
+.login,
+.signup {
     flex: 1;
-    /* Fill remaining space in .gateBox */
     display: flex;
     justify-content: center;
-    /* Centers horizontally */
     align-items: center;
-    /* Centers vertically */
     flex-direction: column;
-    /* Stacks inputs vertically */
 }
 
-.inputContainer {
+/* Input Container */
+.inputContainer,
+.SignupinputContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* Centers the input horizontally */
     width: 100%;
 }
 
+/* Inputs */
 .input {
     width: 350px;
     height: 50px;
     margin-top: 20px;
-    /* Adds vertical spacing between inputs */
     border: 1px solid #dbdbdb;
     border-radius: 10px;
     padding-left: 10px;
+    font-size: 16px;
+    color: #2c3e50;
+    /* Navy Blue text */
 }
 
+.input:focus {
+    border: 2px solid #2ecc71;
+    /* Emerald Green border on focus */
+    outline: none;
+}
+
+/* Select Input */
 .select {
     width: 365px;
 }
 
+/* Forgot Password Link */
 .resetPassword {
     color: #4F46E5;
-    align-self: first baseline;
     margin-top: 10px;
     margin-left: 70px;
     font-size: 15px;
 }
 
-.resetPassword:visited {
-    color: initial;
-}
-
 .resetPassword:hover {
-    color: red;
+    color: #f1c40f;
+    /* Yellow on hover */
 }
 
+/* Login / Signup Button */
 .loginBtn {
-    background-color: #4F46E5;
+    background-color: #e67e22;
+    /* Burnt Orange background */
     border: none;
     width: 350px;
     height: 50px;
     border-radius: 10px;
     font-size: 18px;
-    line-height: 1.25rem;
-    font-weight: 500;
+    font-weight: bold;
     color: white;
     margin-top: 50px;
     cursor: pointer;
-
+    transition: all 0.3s ease-in-out;
 }
 
 .loginBtn:hover {
+    background-color: #2ecc71;
+    /* Emerald Green on hover */
     transform: scale(1.05);
     transition: transform 0.2s ease;
 }
 
+.loginBtn:active {
+    background-color: #2c3e50;
+    /* Navy Blue when clicked */
+}
+
+/* Privacy Terms */
 .privacy-tos {
     margin-top: 20px;
     text-align: center;
@@ -133,7 +164,6 @@
 
 .privacy-tos a {
     color: #007bff;
-    /* Link color */
     text-decoration: none;
 }
 
@@ -141,32 +171,29 @@
     text-decoration: underline;
 }
 
-
-.SignupinputContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* Centers the input horizontally */
-    width: 100%;
-}
-
+/* First Name / Last Name Inputs for Signup */
 .fnLn {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 100%;
-    flex-wrap: nowrap;
     justify-content: center;
-    gap: 10px
+    gap: 10px;
 }
 
 .fnLn>input {
     height: 50px;
     margin-top: 20px;
     width: 162px;
-    /* Adds vertical spacing between inputs */
     border: 1px solid #dbdbdb;
     border-radius: 10px;
     padding-left: 10px;
+    font-size: 16px;
+    color: #2c3e50;
+    /* Navy Blue text */
+}
+
+.fnLn>input:focus {
+    border: 2px solid #2ecc71;
+    /* Emerald Green border on focus */
+    outline: none;
 }
