@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt');
 const { body, validationResult } = require('express-validator');
 const UserModel = require('../Models/UserModel');
 const saltRounds = 10;
-const { signToken, verifyToken } = require('../utils/JwtAuth')
-var CryptoJS = require("crypto-js");
+const { signToken, verifyToken } = require('../utils/JwtAuth');
+const { EncryptData } = require('../utils/DataEncrypter');
 
 // User creates account with input validation
 userApiRouter.post(
@@ -99,16 +99,15 @@ userApiRouter.post(
             delete userObject.password; // Remove sensitive data
 
             // Encrypt user data
-            var userDataEncrypted = CryptoJS.AES.encrypt(JSON.stringify({
+            let EncryptedData = EncryptData({
                 userData: userObject,
                 token: token,
                 message: 'ACCESS_GRANTED',
                 status: 'SUCCESS'
-            }), process.env.ENCRYPTION_KEY).toString();
-
+            })
             // Send encrypted data as part of a JSON response
             res.status(200).json({
-                encryptedData: userDataEncrypted,
+                encryptedData: EncryptedData,
                 message: "Encryption successful",
                 status: "SUCCESS"
             });
