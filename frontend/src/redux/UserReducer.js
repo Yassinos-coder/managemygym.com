@@ -30,7 +30,7 @@ const UserReducer = createSlice({
         userData: [],
         status: null,
         isUserConnected: false,
-
+        
     },
     reducers: {
         setUserConnected(state, action) {

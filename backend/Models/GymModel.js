@@ -5,17 +5,25 @@ const GymSchema = new db.Schema({
         type: String,
         required: true,
     },
+    gymLocation: {
+        type: String,
+        required: true,
+    },
     gymOwnerId: {
         type: db.Types.ObjectId,
         required: true,
     },
     gymMembers: {
         type: JSON,
-        required: true
+        required: false
     },
     gymSubscriptionPlans: {
         type: JSON,
         required: true
+    },
+    gymEmployees: {
+        type: JSON,
+        required: false
     }
 });
 
