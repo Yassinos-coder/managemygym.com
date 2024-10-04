@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { AxiosDefault } from '../utils/AxiosDefault';
+import AxiosDefault from '../utils/AxiosDefault';
 import { DecryptData } from '../utils/DecryptData';
 
 
@@ -30,7 +30,7 @@ const UserReducer = createSlice({
         userData: [],
         status: null,
         isUserConnected: false,
-        
+
     },
     reducers: {
         setUserConnected(state, action) {

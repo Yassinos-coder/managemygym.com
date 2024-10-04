@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { AxiosDefault } from "../utils/AxiosDefault";
+import AxiosDefault  from "../utils/AxiosDefault";
 import { DecryptData } from "../utils/DecryptData";
 
 
 export const GetGymData = createAsyncThunk('gym/GetGymData', async ({ uuid }) => {
     try {
-        const response = await AxiosDefault.get('GetGymData', uuid)
+        const response = await AxiosDefault.get(`GetGymData/${uuid}`)
         let DecryptedData = await DecryptData(response.data)
         return DecryptedData
     } catch (err) {

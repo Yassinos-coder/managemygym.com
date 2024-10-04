@@ -58,6 +58,9 @@
 }
 
 .gymRegistorBox {
+    position: relative;
+    top: -100px; /* Start off-screen */
+    opacity: 0; /* Initially hidden */
     max-width: 800px;
     height: fit-content;
     max-height: 600px;
@@ -67,11 +70,16 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding: 20px; /* Optional: Add padding */
-    background-color: #f9f9f9; /* Optional: Add background color */
-    border-radius: 10px; /* Optional: Add rounded corners */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: top 0.5s ease, opacity 0.5s ease; /* Smooth transition */
+}
 
+.gymRegistorBox.show {
+    top: 50px; /* Drop into view */
+    opacity: 1; /* Make visible */
 }
 
 

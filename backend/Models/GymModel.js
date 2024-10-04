@@ -21,7 +21,7 @@ const GymSchema = new db.Schema({
         type: JSON,
         required: true
     },
-    gymEmployees: {
+    gymEmployeeList: {
         type: JSON,
         required: false
     }

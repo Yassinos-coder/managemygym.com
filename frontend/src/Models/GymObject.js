@@ -4,14 +4,14 @@ class GymObject {
         gymOwnerId = "",
         gymLocation = "",
         gymMembers = {},
-        gymEmployees = {},
+        gymEmployeeList = {},
         gymSubscriptionPlans = {}
     ) {
         this.gymName = gymName
         this.gymOwnerId = gymOwnerId
         this.gymLocation = gymLocation
         this.gymMembers = gymMembers
-        this.gymEmployees = gymEmployees
+        this.gymEmployeeList = gymEmployeeList
         this.gymSubscriptionPlans = gymSubscriptionPlans
 
     }

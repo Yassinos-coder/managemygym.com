@@ -23,6 +23,7 @@ const compression = require("compression");
 const hpp = require("hpp");
 const fileUpload = require("express-fileupload");
 const userApiRouter = require("./APIs/usersAPI");
+const gymAPIRouter = require("./APIs/gymAPI");
 
 // Initialize express app
 const app = express();
@@ -90,6 +91,7 @@ connectDB(); // Call the database connection function
 
 // Initialize routers
 app.use(userApiRouter);
+app.use(gymAPIRouter)
 
 // Define a catch-all route for undefined routes
 app.use((req, res, next) => {

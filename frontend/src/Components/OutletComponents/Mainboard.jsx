@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import '../../assets/css/outletCss/Mainboard.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import GymObject from '../../Models/GymObject';
 import { FaMinusCircle } from "react-icons/fa";
+import { AddGym } from '../../redux/GymReducer';
 
 const Mainboard = () => {
   const [newGym, setNewGym] = useState(new GymObject());
   const userData = useSelector((state) => state.UserReducer.userData);
   const GymData = useSelector((state) => state.GymReducer.GymData);
-
+  const dispatch = useDispatch()
   // State to control form visibility
   const [showGymRegistration, setShowGymRegistration] = useState(false);
   const [gymPlans, setGymPlans] = useState([]); // Array of gym plans
@@ -24,6 +25,12 @@ const Mainboard = () => {
     setGymEmployees([...gymEmployees, { employeeName: '', employeeRole: '' }]);
   };
 
+  const sendNewGymData = () => {
+    console.log(gymEmployees, gymPlans, newGym)
+
+    // dispatch(AddGym({ newGym }))
+  }
+
   return (
     <div className='Mainboard'>
       <p className='titleMainboard'>Bienvenue sur votre tableau de bord, {!GymData ? `Undefined` : `${GymData.gymName}`}</p>
@@ -33,13 +40,13 @@ const Mainboard = () => {
           <>
             <div className='registerGym'>
               <p>Ajouter votre salle de sport</p>
-              <button onClick={() => setShowGymRegistration(true)}>Ajouter une salle</button>
+              <button onClick={() => setShowGymRegistration(!showGymRegistration)}>Ajouter une salle</button>
             </div>
 
             {/* Gym Registration Form */}
             {
               showGymRegistration && (
-                <div className="gymRegistorBox">
+                <div className={`gymRegistorBox ${showGymRegistration ? 'show' : ''}`}>
                   <p>Veulliez remplir ce formulaire</p>
                   <input
                     className='input'
@@ -149,7 +156,10 @@ const Mainboard = () => {
                         </div>
                       ))
                     }
-
+                    <button onClick={()=> {
+                      setNewGym({...newGym, gymOwnerId: localStorage.uuid, gymEmployeeList: gymEmployees, gymSubscriptionPlans: gymPlans})
+                      sendNewGymData()
+                    }}>Ajouter la salle</button>
                   </div>
                 </div>
               )
