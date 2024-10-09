@@ -3,9 +3,9 @@ class GymObject {
         gymName = "",
         gymOwnerId = "",
         gymLocation = "",
-        gymMembers = {},
-        gymEmployeeList = {},
-        gymSubscriptionPlans = {}
+        gymMembers = [],
+        gymEmployeeList = [],
+        gymSubscriptionPlans = []
     ) {
         this.gymName = gymName
         this.gymOwnerId = gymOwnerId

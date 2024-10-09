@@ -15,9 +15,9 @@ export const GetGymData = createAsyncThunk('gym/GetGymData', async ({ uuid }) =>
 })
 
 
-export const AddGym = createAsyncThunk('gym/AddGym', async({NewGym}) => {
+export const AddGym = createAsyncThunk('gym/AddGym', async({newGym}) => {
     try {
-        const response = await AxiosDefault.post('AddGym', NewGym)
+        const response = await AxiosDefault.post('AddGym', newGym)
         let DecryptedData = await DecryptData(response.data)
         return DecryptedData
     } catch (err) {

@@ -17,14 +17,14 @@ const GymSchema = new db.Schema({
         type: JSON,
         required: false
     },
-    gymSubscriptionPlans: {
-        type: JSON,
-        required: true
-    },
-    gymEmployeeList: {
-        type: JSON,
-        required: false
-    }
+    gymSubscriptionPlans: [{
+        planName: String,
+        planPrice: String,
+    }],
+    gymEmployeeList: [{
+        employeeName: String,
+        employeeRole: String,
+    }, { timestamps: true }],
 });
 
 const GymModel = db.model('Gyms', GymSchema);

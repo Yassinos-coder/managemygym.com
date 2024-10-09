@@ -14,6 +14,7 @@ const Mainboard = () => {
   const [showGymRegistration, setShowGymRegistration] = useState(false);
   const [gymPlans, setGymPlans] = useState([]); // Array of gym plans
   const [gymEmployees, setGymEmployees] = useState([]); // Array of gym employees
+  const uuid = localStorage.getItem('uuid')
 
   // Handler to add a new plan input
   const addGymPlan = () => {
@@ -28,7 +29,7 @@ const Mainboard = () => {
   const sendNewGymData = () => {
     console.log(gymEmployees, gymPlans, newGym)
 
-    // dispatch(AddGym({ newGym }))
+     dispatch(AddGym({ newGym }))
   }
 
   return (
@@ -83,6 +84,7 @@ const Mainboard = () => {
                               const updatedPlans = [...gymPlans];
                               updatedPlans[index].planName = e.currentTarget.value;
                               setGymPlans(updatedPlans);
+                              setNewGym({ ...newGym, gymSubscriptionPlans: gymPlans })
                             }}
                           />
                           <input
@@ -129,6 +131,7 @@ const Mainboard = () => {
                               const updatedEmployees = [...gymEmployees];
                               updatedEmployees[index].employeeName = e.currentTarget.value;
                               setGymEmployees(updatedEmployees);
+                              setNewGym({ ...newGym, gymEmployeeList: gymEmployees, gymOwnerId:uuid });
                             }}
                           />
                           <select
@@ -137,7 +140,8 @@ const Mainboard = () => {
                             onChange={(e) => {
                               const updatedEmployees = [...gymEmployees];
                               updatedEmployees[index].employeeRole = e.currentTarget.value;
-                              setGymEmployees(updatedEmployees);
+                              setGymEmployees(updatedEmployees)
+
                             }}
                           >
                             <option value="">Son rôle</option>
@@ -156,8 +160,7 @@ const Mainboard = () => {
                         </div>
                       ))
                     }
-                    <button onClick={()=> {
-                      setNewGym({...newGym, gymOwnerId: localStorage.uuid, gymEmployeeList: gymEmployees, gymSubscriptionPlans: gymPlans})
+                    <button onClick={() => {
                       sendNewGymData()
                     }}>Ajouter la salle</button>
                   </div>

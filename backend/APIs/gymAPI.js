@@ -30,6 +30,7 @@ gymAPIRouter.get('/api/v1/GetGymData/:uuid', verifyToken, async (req, res) => {
 
 gymAPIRouter.post('/api/v1/AddGym', verifyToken, async (req, res) => {
     let newGym = req.body;
+    console.log(newGym)
     try {
         const AddNewGym = new GymModel(newGym);
         const isSaved = await AddNewGym.save();
