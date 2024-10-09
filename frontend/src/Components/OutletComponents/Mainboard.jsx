@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import GymObject from '../../Models/GymObject';
 import { FaMinusCircle } from "react-icons/fa";
 import { AddGym } from '../../redux/GymReducer';
+import { IoMdCloseCircle } from "react-icons/io";
 
 const Mainboard = () => {
   const [newGym, setNewGym] = useState(new GymObject());
@@ -15,6 +16,7 @@ const Mainboard = () => {
   const [gymPlans, setGymPlans] = useState([]); // Array of gym plans
   const [gymEmployees, setGymEmployees] = useState([]); // Array of gym employees
   const uuid = localStorage.getItem('uuid')
+
 
   // Handler to add a new plan input
   const addGymPlan = () => {
@@ -29,7 +31,7 @@ const Mainboard = () => {
   const sendNewGymData = () => {
     console.log(gymEmployees, gymPlans, newGym)
 
-     dispatch(AddGym({ newGym }))
+    dispatch(AddGym({ newGym }))
   }
 
   return (
@@ -48,7 +50,14 @@ const Mainboard = () => {
             {
               showGymRegistration && (
                 <div className={`gymRegistorBox ${showGymRegistration ? 'show' : ''}`}>
-                  <p>Veulliez remplir ce formulaire</p>
+                  <div className='gymRegistorBoxHeader'>
+                    <IoMdCloseCircle className='closeRegisterBox' onClick={() => setShowGymRegistration(!showGymRegistration)} cursor={'pointer'}  />
+
+                    <p>Veulliez remplir ce formulaire</p>
+                  </div>
+
+
+
                   <input
                     className='input'
                     type="text"
@@ -131,7 +140,7 @@ const Mainboard = () => {
                               const updatedEmployees = [...gymEmployees];
                               updatedEmployees[index].employeeName = e.currentTarget.value;
                               setGymEmployees(updatedEmployees);
-                              setNewGym({ ...newGym, gymEmployeeList: gymEmployees, gymOwnerId:uuid });
+                              setNewGym({ ...newGym, gymEmployeeList: gymEmployees, gymOwnerId: uuid });
                             }}
                           />
                           <select
@@ -160,7 +169,7 @@ const Mainboard = () => {
                         </div>
                       ))
                     }
-                    <button onClick={() => {
+                    <button className='buttonsGymPlansANDEmployees btnAddGym' onClick={() => {
                       sendNewGymData()
                     }}>Ajouter la salle</button>
                   </div>
